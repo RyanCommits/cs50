@@ -6,6 +6,7 @@
 #include "dictionary.h"
 #include <string.h>
 #include <strings.h>
+#include <ctype.h>
 
 // Represents a node in a hash table
 typedef struct node
@@ -18,7 +19,7 @@ node;
 unsigned int words = 0;
 
 // Number of buckets in hash table
-const unsigned int N = 1;
+const unsigned int N = 26;
 
 // Hash table
 node *table[N];
@@ -40,8 +41,8 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // TODO
-    return 0;
+    int n = (int) tolower(word[0]) - 97;
+    return n;
 }
 
 // Loads dictionary into memory, returning true if successful else false
@@ -73,6 +74,7 @@ bool load(const char *dictionary)
         table[index] = n;
     }
 
+    fclose(file);
     return true;
 }
 
